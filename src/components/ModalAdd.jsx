@@ -36,6 +36,7 @@ export default function ModalAdd(props) {
   }
   async function addPet() {
     await addDoc(connRef, addForm);
+    modalAdd.onClose();
     setAddForm(initialState);
   }
   return (
