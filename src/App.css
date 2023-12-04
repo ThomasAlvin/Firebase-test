@@ -27,7 +27,18 @@
 .App-link {
   color: #61dafb;
 }
-
+.loginpage-container {
+  width: 430px;
+}
+.loginpage-inputs {
+  gap: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.loginpage-forgot-password:hover {
+  color: #0060ae;
+  cursor: pointer;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

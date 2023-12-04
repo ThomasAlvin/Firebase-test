@@ -102,7 +102,7 @@ export default function ModalLogin(props) {
                 <Flex flexDir={"column"}>
                   <Flex
                     cursor={"pointer"}
-                    onClick={() => console.log(auth.currentUser?.email)}
+                    // onClick={() => console.log(auth.currentUser?.email)}
                     fontWeight={"500"}
                   >
                     Email

@@ -50,10 +50,9 @@ export default function HomePage() {
   return (
     <div>
       <Navbar />
-      <Box p={"30px"}>
+      <Box p={"30px"} mx={"50px"}>
         <Flex my={"20px"} alignItems={"center"} gap={"30px"}>
-          <ModalLogin />
-          <Heading>Hello, {auth.currentUser?.email || "Guesta"}</Heading>
+          <Heading>Hello, {auth.currentUser?.displayName || "Guest"}</Heading>
         </Flex>
         <Flex>
           <Grid templateColumns="repeat(4, 1fr)" gap={6}>

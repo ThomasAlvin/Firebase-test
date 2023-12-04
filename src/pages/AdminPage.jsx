@@ -41,12 +41,10 @@ export default function AdminPage() {
       // const lol = await getDoc(q); // 1
       // console.log(lol.data()); // 1
       onSnapshot(q, (snapshot) => {
-        console.log(snapshot);
         const petsData = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        console.log(petsData);
         setPets(petsData);
       });
     };
@@ -58,10 +56,13 @@ export default function AdminPage() {
   return (
     <Flex flexDir={"column"}>
       <Navbar />
-      <Box p={"30px"}>
+      <Box p={"30px"} mx={"50px"}>
         <Button my={"20px"} onClick={logout}>
           Logout
         </Button>
+        <Heading mb={"20px"}>
+          Hello, {auth.currentUser?.displayName || "Guest"}
+        </Heading>
         <Flex>
           <Grid templateColumns="repeat(4, 1fr)" gap={6}>
             {pets.map((val) => (

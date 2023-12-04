@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
-export default function ProtectedPage({ children, needLogin = false }) {
+export default function ProtectedPage({
+  children,
+  needLogin = false,
+  guestOnly = false,
+}) {
   const nav = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -13,6 +17,9 @@ export default function ProtectedPage({ children, needLogin = false }) {
       if (needLogin && !user.email) {
         setIsLoading(false);
         return nav("/");
+      } else if (guestOnly && user?.email) {
+        setIsLoading(false);
+        return nav("/admin");
       } else {
         setIsLoading(false);
       }
