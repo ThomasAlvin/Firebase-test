@@ -15,7 +15,6 @@ import Navbar from "../components/Navbar";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import db from "../firebase";
 import { getAuth } from "firebase/auth";
-import ModalLogin from "../components/ModalLogin";
 export default function HomePage() {
   const connRef = collection(db, "pets");
   const q = query(connRef);
