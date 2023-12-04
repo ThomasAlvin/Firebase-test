@@ -14,7 +14,7 @@ export default function ProtectedPage({
   useEffect(() => {
     // Clean up the observer when the component is unmounted
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (needLogin && !user.email) {
+      if (needLogin && !user?.email) {
         setIsLoading(false);
         return nav("/");
       } else if (guestOnly && user?.email) {

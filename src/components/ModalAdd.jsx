@@ -21,21 +21,33 @@ import {
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { IoMdClose, IoMdPersonAdd } from "react-icons/io";
-import db from "../firebase";
+import db, { storage } from "../firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
 
 export default function ModalAdd(props) {
   const initialState = { name: "", type: "", description: "" };
   const modalAdd = useDisclosure();
   const [addForm, setAddForm] = useState(initialState);
   const connRef = collection(db, "pets");
+
   function inputHandler(input) {
     const { value, id } = input.target;
     const tempobject = { ...addForm };
     tempobject[id] = value;
     setAddForm(tempobject);
   }
+  function fileHandler(input) {
+    const { files, id } = input.target;
+    const tempobject = { ...addForm };
+    tempobject[id] = files[0];
+    setAddForm(tempobject);
+  }
   async function addPet() {
-    await addDoc(connRef, addForm);
+    const imageRef = ref(storage, `images/${addForm.imageUrl?.name + v4()}`);
+    await uploadBytes(imageRef, addForm?.imageUrl);
+    const imageUrl = await getDownloadURL(imageRef);
+    await addDoc(connRef, { ...addForm, imageUrl });
     modalAdd.onClose();
     setAddForm(initialState);
   }
@@ -101,6 +113,23 @@ export default function ModalAdd(props) {
               flexDir={"column"}
             >
               <Flex gap={"10px"} flexDir={"column"}>
+                <Flex flexDir={"column"}>
+                  <Flex fontWeight={"500"}>Pet Image</Flex>
+                  <Flex>
+                    <Input
+                      multiple={false}
+                      type="file"
+                      _placeholder={{ opacity: "1" }}
+                      id="imageUrl"
+                      variant={"flushed"}
+                      onChange={fileHandler}
+                      placeholder="Pet's Name"
+                    ></Input>
+                  </Flex>
+                  <Flex color={"red"} fontSize={"0.8rem"}>
+                    {}
+                  </Flex>
+                </Flex>
                 <Flex flexDir={"column"}>
                   <Flex fontWeight={"500"}>Name</Flex>
                   <Flex>
