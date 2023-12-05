@@ -12,14 +12,26 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import db from "../firebase";
 import { getAuth } from "firebase/auth";
 export default function HomePage() {
   const connRef = collection(db, "pets");
-  const q = query(connRef);
+  let q = query(connRef);
   const [pets, setPets] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+
+  useEffect(() => {
+    getPets();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const getPets = async () => {
+    if (searchInput) {
+      q = query(
+        connRef,
+        where("name", ">=", searchInput),
+        where("name", "<", searchInput + "\uf8ff")
+      );
+    }
     onSnapshot(q, (snapshot) => {
       const petsData = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -28,9 +40,6 @@ export default function HomePage() {
       setPets(petsData);
     });
   };
-  useEffect(() => {
-    getPets();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   function capFirst(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
@@ -48,7 +57,11 @@ export default function HomePage() {
   // }
   return (
     <div>
-      <Navbar />
+      <Navbar
+        setSearchInput={setSearchInput}
+        searchInput={searchInput}
+        getPets={getPets}
+      />
       <Box p={"30px"} mx={"50px"}>
         <Flex my={"20px"} alignItems={"center"} gap={"30px"}>
           <Heading>Hello, {auth.currentUser?.displayName || "Guest"}</Heading>

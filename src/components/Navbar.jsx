@@ -13,7 +13,7 @@ import { IoSearch } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
-export default function Navbar() {
+export default function Navbar({ setSearchInput, searchInput, getPets }) {
   const nav = useNavigate();
   const navLinks = [
     {
@@ -71,9 +71,16 @@ export default function Navbar() {
           <Flex gap={"50px"} justifyContent={"center"} alignItems={"center"}>
             <div class="input-group primary-color-reverse search-bar button-hover">
               <InputGroup>
-                <Input type={"text"} placeholder="Search" />
+                <Input
+                  onChange={(val) => {
+                    setSearchInput(val.target.value);
+                  }}
+                  value={searchInput}
+                  type={"text"}
+                  placeholder="Search"
+                />
                 <InputRightElement>
-                  <Button>
+                  <Button onClick={getPets}>
                     <Icon w={"20px"} h={"20px"} as={IoSearch}></Icon>
                   </Button>
                 </InputRightElement>

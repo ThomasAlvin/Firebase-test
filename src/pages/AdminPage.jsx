@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import db, { auth } from "../firebase";
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import {
   Box,
   ButtonGroup,
@@ -23,29 +23,39 @@ import ModalDelete from "../components/ModalDelete";
 export default function AdminPage() {
   const typeOptions = ["Dog", "Cat"];
   const connRef = collection(db, "pets");
-  const q = query(connRef);
+  let q = query(connRef);
   const [pets, setPets] = useState([]);
-
+  const [searchInput, setSearchInput] = useState("");
   useEffect(() => {
-    const getPets = async () => {
-      // const lol = await getDoc(q); // 1
-      // console.log(lol.data()); // 1
-      onSnapshot(q, (snapshot) => {
-        const petsData = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setPets(petsData);
-      });
-    };
     getPets();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const getPets = async () => {
+    if (searchInput) {
+      q = query(
+        connRef,
+        where("name", ">=", searchInput),
+        where("name", "<", searchInput + "\uf8ff")
+      );
+    }
+    onSnapshot(q, (snapshot) => {
+      const petsData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setPets(petsData);
+    });
+  };
   function capFirst(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
+
   return (
     <Flex flexDir={"column"}>
-      <Navbar />
+      <Navbar
+        setSearchInput={setSearchInput}
+        searchInput={searchInput}
+        getPets={getPets}
+      />
       <Box p={"30px"} mx={"50px"}>
         <Heading mb={"20px"}>
           Hello, {auth.currentUser?.displayName || "Guest"}
