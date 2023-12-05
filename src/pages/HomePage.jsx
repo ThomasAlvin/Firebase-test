@@ -62,14 +62,22 @@ export default function HomePage() {
         searchInput={searchInput}
         getPets={getPets}
       />
-      <Box p={"30px"} mx={"50px"}>
+      <Box p={"30px"} mx={{ base: "10px", md: "50px" }}>
         <Flex my={"20px"} alignItems={"center"} gap={"30px"}>
           <Heading>Hello, {auth.currentUser?.displayName || "Guest"}</Heading>
         </Flex>
-        <Flex>
-          <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+        <Flex justifyContent={"center"}>
+          <Grid
+            templateColumns={{
+              base: "repeat(1, 1fr)",
+              sm: "repeat(2, 1fr)",
+              md: "repeat(3, 1fr)",
+              lg: "repeat(5, 1fr)",
+            }}
+            gap={6}
+          >
             {pets.map((val) => (
-              <GridItem w="100%" h="10" bg="blue.500">
+              <GridItem bg="blue.500">
                 <Card maxW="sm">
                   <CardBody>
                     <Image

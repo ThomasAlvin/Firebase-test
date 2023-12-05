@@ -47,28 +47,38 @@ export default function Navbar({ setSearchInput, searchInput, getPets }) {
         <Flex
           w="100%"
           py="10px"
-          px={"150px"}
+          px={{ base: "10px", md: "150px" }}
           justifyContent={"space-between"}
           alignItems={"center"}
         >
           <Flex
-            gap="60px"
+            gap={{ base: "10px", md: "60px" }}
+            px={{ base: "10px", md: "0px" }}
             justifyContent={"space-between"}
             alignItems={"center"}
           >
             <Flex cursor={"pointer"}>
               <Link href="/">
-                <Flex fontWeight={600} fontSize={"3rem"}>
+                <Flex fontWeight={600} fontSize={{ base: "2rem", md: "3rem" }}>
                   <Flex color={"#94531f"}>Pet</Flex>
                   <Flex color={"#277819"}>Zone</Flex>
                 </Flex>
               </Link>
             </Flex>
-            <Flex color={"#94531f"} fontSize={"18px"} fontWeight={700}>
+            <Flex
+              display={{ base: "none", md: "flex" }}
+              color={"#94531f"}
+              fontSize={"18px"}
+              fontWeight={700}
+            >
               Because eveyone needs a home!
             </Flex>
           </Flex>
-          <Flex gap={"50px"} justifyContent={"center"} alignItems={"center"}>
+          <Flex
+            gap={{ base: "10px", md: "50px" }}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             <div class="input-group primary-color-reverse search-bar button-hover">
               <InputGroup>
                 <Input
@@ -89,13 +99,14 @@ export default function Navbar({ setSearchInput, searchInput, getPets }) {
             <Box h={"40px"} w={"1px"} bgColor={"white"}></Box>
             <Flex
               justifyContent={"space-between"}
+              display={{ base: "none", md: "flex" }}
               gap={"30px"}
               alignItems={"center"}
             >
               <Flex
                 p={"3px"}
                 gap={"30px"}
-                className="primary-color-reverse navbar-sosmed"
+                className="navbar-sosmed"
                 color={"#94531f"}
                 fontWeight={600}
                 fontSize={"1.4rem"}
@@ -128,9 +139,10 @@ export default function Navbar({ setSearchInput, searchInput, getPets }) {
       </Flex>
       <Flex
         py="10px"
-        px={"150px"}
+        px={{ sm: "30px", md: "150px" }}
         gap={"40px"}
         bgColor={"#94531f"}
+        display={{ base: "none", md: "flex" }}
         color={"white"}
       >
         {navLinks.map((val) => (
@@ -138,6 +150,18 @@ export default function Navbar({ setSearchInput, searchInput, getPets }) {
             <Link href={val.link}>{val.name}</Link>
           </Flex>
         ))}
+      </Flex>
+      <Flex
+        display={{ base: "flex", md: "none" }}
+        py="10px"
+        px={"30px"}
+        bgColor={"#94531f"}
+        color={"white"}
+      >
+        <Flex gap={"40px"}>
+          <Link href={"/login"}>Login</Link>
+          <Link href={"/register"}>Register</Link>
+        </Flex>
       </Flex>
     </Flex>
   );
