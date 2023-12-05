@@ -45,8 +45,8 @@ export default function LoginPage() {
       );
       nav("/admin");
       toast({
-        title: "Account created.",
-        description: "We've created your account for you.",
+        title: "Success",
+        description: "Login Successful",
         status: "success",
         duration: 5000,
         isClosable: true,
