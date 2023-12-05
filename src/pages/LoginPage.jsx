@@ -83,7 +83,7 @@ export default function LoginPage() {
                   py={"30px"}
                   fontSize={"28px"}
                   fontWeight={"700"}
-                  color={"#ed1d24"}
+                  color={"#94531f"}
                 >
                   Login Admin
                 </Center>
@@ -131,7 +131,7 @@ export default function LoginPage() {
                     h={"40px"}
                     w={"100%"}
                     fontSize={"1.6rem"}
-                    bgColor={"#ed1d24"}
+                    bgColor={"#94531f"}
                     onClick={logIn}
                   >
                     Login

@@ -86,7 +86,7 @@ export default function RegisterPage() {
                   py={"30px"}
                   fontSize={"28px"}
                   fontWeight={"700"}
-                  color={"#ed1d24"}
+                  color={"#94531f"}
                 >
                   Register Admin
                 </Center>
@@ -146,7 +146,7 @@ export default function RegisterPage() {
                     w={"100%"}
                     fontSize={"1.6rem"}
                     onClick={register}
-                    bgColor={"#ed1d24"}
+                    bgColor={"#94531f"}
                   >
                     Register
                   </Button>
