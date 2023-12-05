@@ -63,9 +63,8 @@ export default function HomePage() {
                       w={"200px"}
                       h={"150px"}
                       src={
-                        val.type === "Dog"
-                          ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-JlP4N5eo5T8JIXltsdCxqFZ2vItNLuJMiQ&usqp=CAU"
-                          : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGjOcJoSJnl29PSYV2u5BnqVqXVQex6mxeag&usqp=CAU"
+                        val.imageUrl ||
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS_lSNw7Ee7u6J7SWu5Ku6BP6H3kMcOI9TFw&usqp=CAU"
                       }
                       alt="Pet Image"
                       borderRadius="lg"
