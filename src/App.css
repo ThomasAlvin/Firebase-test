@@ -39,6 +39,12 @@
   color: #0060ae;
   cursor: pointer;
 }
+
+.navbar-link {
+  color: white !important;
+  font-size: 20px;
+  font-weight: 600 !important;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

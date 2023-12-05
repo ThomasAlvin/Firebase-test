@@ -3,7 +3,6 @@ import db, { auth } from "../firebase";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import {
   Box,
-  Button,
   ButtonGroup,
   Card,
   CardBody,
@@ -21,21 +20,12 @@ import Navbar from "../components/Navbar";
 import ModalAdd from "../components/ModalAdd";
 import ModalEdit from "../components/ModalEdit";
 import ModalDelete from "../components/ModalDelete";
-import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 export default function AdminPage() {
-  const nav = useNavigate();
   const typeOptions = ["Dog", "Cat"];
   const connRef = collection(db, "pets");
-  // const bookDocRef = doc(db, "books", "2JPFXswQJwhZXK4GXQ7R"); // 1 for fetching 1 data
-  // const q = query(bookDocRef); // 1
   const q = query(connRef);
   const [pets, setPets] = useState([]);
 
-  const logout = async () => {
-    await signOut(auth);
-    nav("/");
-  };
   useEffect(() => {
     const getPets = async () => {
       // const lol = await getDoc(q); // 1
@@ -57,9 +47,6 @@ export default function AdminPage() {
     <Flex flexDir={"column"}>
       <Navbar />
       <Box p={"30px"} mx={"50px"}>
-        <Button my={"20px"} onClick={logout}>
-          Logout
-        </Button>
         <Heading mb={"20px"}>
           Hello, {auth.currentUser?.displayName || "Guest"}
         </Heading>
