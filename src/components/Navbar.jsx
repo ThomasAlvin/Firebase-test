@@ -41,6 +41,12 @@ export default function Navbar({ setSearchInput, searchInput, getPets }) {
     await signOut(auth);
     nav("/");
   };
+  function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      getPets();
+    }
+  }
+
   return (
     <Flex flexDir={"column"}>
       <Flex className="primary-color">
@@ -82,6 +88,7 @@ export default function Navbar({ setSearchInput, searchInput, getPets }) {
             <div class="input-group primary-color-reverse search-bar button-hover">
               <InputGroup>
                 <Input
+                  onKeyUp={handleKeyPress}
                   onChange={(val) => {
                     setSearchInput(val.target.value);
                   }}

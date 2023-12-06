@@ -71,12 +71,12 @@ export default function AdminPage() {
             gap={6}
           >
             {pets.map((val) => (
-              <GridItem bg="blue.500">
-                <Card maxW="sm">
+              <GridItem bg="blue.500" boxShadow={"0 0 5px rgba(0, 0, 0, 0.3)"}>
+                <Card maxW="sm" borderRadius={"0px"}>
                   <CardBody>
                     <Image
                       w={"200px"}
-                      h={"150px"}
+                      h={"160px"}
                       src={
                         val.imageUrl ||
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS_lSNw7Ee7u6J7SWu5Ku6BP6H3kMcOI9TFw&usqp=CAU"

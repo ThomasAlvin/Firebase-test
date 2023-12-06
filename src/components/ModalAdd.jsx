@@ -53,10 +53,14 @@ export default function ModalAdd(props) {
   }
   return (
     <>
-      <GridItem onClick={modalAdd.onOpen} cursor={"pointer"}>
+      <GridItem
+        onClick={modalAdd.onOpen}
+        cursor={"pointer"}
+        boxShadow={"0 0 5px rgba(0, 0, 0, 0.3)"}
+      >
         <Card
           maxW="sm"
-          height={"460px"}
+          height={"468px"}
           _hover={{ backgroundColor: "#ebe8e8" }}
         >
           <CardBody display={"flex"} flexDir={"column"}>

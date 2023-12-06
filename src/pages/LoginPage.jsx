@@ -23,7 +23,6 @@ export default function LoginPage() {
       document.getElementById("submit").click();
     }
   }, []);
-
   const [seePassword, setSeePassword] = useState(false);
   const initialState = {
     email: "",
@@ -95,6 +94,7 @@ export default function LoginPage() {
                     placeholder="Email or Phone Number"
                     pl={"15px"}
                     onChange={inputHandler}
+                    onKeyUp={handleKeyPress}
                     id="email"
                     w={"300px"}
                   ></Input>
@@ -104,7 +104,7 @@ export default function LoginPage() {
                       w={"300px"}
                       pl={"15px"}
                       id="password"
-                      onKeyPress={handleKeyPress}
+                      onKeyUp={handleKeyPress}
                       onChange={inputHandler}
                       fontSize={"12px"}
                       type={seePassword ? "text" : "password"}
