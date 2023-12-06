@@ -166,8 +166,25 @@ export default function Navbar({ setSearchInput, searchInput, getPets }) {
         color={"white"}
       >
         <Flex gap={"40px"}>
-          <Link href={"/login"}>Login</Link>
-          <Link href={"/register"}>Register</Link>
+          <Flex
+            cursor={"pointer"}
+            onClick={
+              auth.currentUser?.email
+                ? logout
+                : () => {
+                    nav("/login");
+                  }
+            }
+          >
+            {auth.currentUser?.email ? "Logout" : "Login"}
+          </Flex>
+          <Flex
+            onClick={() => {
+              nav("/register");
+            }}
+          >
+            Register
+          </Flex>
         </Flex>
       </Flex>
     </Flex>
